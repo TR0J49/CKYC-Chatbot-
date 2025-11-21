@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Protean Website Intelligence</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', path='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-mark">
+          <img
+            src="/image.png"
+            alt="Protean logo"
+            class="brand-logo-img"
+          />
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Protean</span>
+          <span class="brand-tagline">Website Intelligence Extractor</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-main">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="app-footer">
+      <span>&copy; {{ 2025 }} Protean Intelligence. Built with FastAPI.</span>
+    </footer>
+  </body>
+</html>
