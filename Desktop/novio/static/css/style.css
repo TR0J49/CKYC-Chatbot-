@@ -89,17 +89,33 @@ html, body {
     gap: 8px;
 }
 
-.logo-img {
-    height: 28px;
-    width: auto;
-    object-fit: contain;
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-light) 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+.logo-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: white;
+    stroke-width: 1.5;
 }
 
 .logo-text {
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 700;
     color: var(--text-primary);
-    letter-spacing: -0.3px;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .header-subtitle {
