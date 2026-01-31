@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novio AI Assistant</title>
+    <link rel="icon" type="image/png" href="/static/navio favicon.png">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="/static/novio_light.BXj46yT_.webp" alt="Novio" class="logo-img">
+                    <span class="logo-text">AI</span>
+                </div>
+                <div class="header-subtitle">
+                    <span class="status-dot"></span>
+                    <span>Online</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Chat Container -->
+        <main class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                <!-- Welcome Message -->
+                <div class="message assistant-message welcome-message">
+                    <div class="message-avatar">
+                        <div class="avatar-icon">
+                            <!-- AI Brain Icon -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2a4 4 0 0 1 4 4v1a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
+                                <path d="M12 11v2"/>
+                                <path d="M8 15h8"/>
+                                <circle cx="9" cy="18" r="1"/>
+                                <circle cx="15" cy="18" r="1"/>
+                                <path d="M6 11a6 6 0 0 0 12 0"/>
+                                <path d="M12 22v-3"/>
+                                <path d="M7 22h10"/>
+                                <path d="M5 6a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2"/>
+                                <path d="M19 6a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <p>Hello! I'm your <strong>Novio AI Assistant</strong>. I can help you with:</p>
+                            <ul>
+                                <li>FD-backed credit cards</li>
+                                <li>Account creation and KYC</li>
+                                <li>Card features and benefits</li>
+                                <li>Payments and transactions</li>
+                                <li>General support queries</li>
+                            </ul>
+                            <p>How can I assist you today?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="message-avatar">
+                    <div class="avatar-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2a4 4 0 0 1 4 4v1a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
+                            <path d="M12 11v2"/>
+                            <path d="M8 15h8"/>
+                            <circle cx="9" cy="18" r="1"/>
+                            <circle cx="15" cy="18" r="1"/>
+                            <path d="M6 11a6 6 0 0 0 12 0"/>
+                            <path d="M12 22v-3"/>
+                            <path d="M7 22h10"/>
+                            <path d="M5 6a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2"/>
+                            <path d="M19 6a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Input Area -->
+        <footer class="input-container">
+            <form class="input-form" id="chatForm">
+                <div class="input-wrapper">
+                    <textarea
+                        class="chat-input"
+                        id="messageInput"
+                        placeholder="Ask me anything about Novio..."
+                        rows="1"
+                        autofocus
+                    ></textarea>
+                    <button type="submit" class="send-button" id="sendButton">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 2L11 13"/>
+                            <path d="M22 2L15 22L11 13L2 9L22 2Z"/>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button class="quick-action-btn" data-query="How do I create an account?">Create Account</button>
+                    <button class="quick-action-btn" data-query="What is the minimum FD amount?">Minimum FD</button>
+                    <button class="quick-action-btn" data-query="How to pay credit card bill?">Pay Bill</button>
+                    <button class="quick-action-btn" data-query="What are the card benefits?">Card Benefits</button>
+                </div>
+                <span class="disclaimer">Novio AI may make mistakes. Verify important information.</span>
+            </form>
+        </footer>
+    </div>
+
+    <script src="/static/js/chat.js"></script>
+</body>
+</html>
