@@ -1,6 +1,6 @@
 /**
  * Novio AI Assistant - Chat JavaScript
- * Futuristic UI with dynamic icons and animations
+ * Sidebar + Chat layout with green fintech theme
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -10,7 +10,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const typingIndicator = document.getElementById('typingIndicator');
     const sendButton = document.getElementById('sendButton');
 
-    // Futuristic AI Icon SVG
+    // Sidebar elements
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
+    const sidebarCollapseBtn = document.getElementById('sidebarCollapseBtn');
+    const sidebarExpandTab = document.getElementById('sidebarExpandTab');
+    const newChatBtn = document.getElementById('newChatBtn');
+
+    // AI Icon SVG
     const aiIconSVG = `
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2a4 4 0 0 1 4 4v1a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
@@ -26,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </svg>
     `;
 
-    // Futuristic User Icon SVG
+    // User Icon SVG
     const userIconSVG = `
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -37,7 +46,104 @@ document.addEventListener('DOMContentLoaded', function() {
         </svg>
     `;
 
-    // Auto-resize textarea
+    // Welcome message HTML (used by New Chat)
+    const welcomeMessageHTML = `
+        <div class="message assistant-message welcome-message">
+            <div class="message-avatar">
+                <div class="avatar-icon">
+                    ${aiIconSVG}
+                </div>
+            </div>
+            <div class="message-content">
+                <div class="message-bubble">
+                    <p>Hello! I'm your <strong>Novio AI Assistant</strong>. I can help you with:</p>
+                    <ul>
+                        <li>FD-backed credit cards</li>
+                        <li>Account creation and KYC</li>
+                        <li>Card features and benefits</li>
+                        <li>Payments and transactions</li>
+                        <li>General support queries</li>
+                    </ul>
+                    <p>How can I assist you today?</p>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // ===== SIDEBAR LOGIC =====
+
+    function isMobile() {
+        return window.innerWidth < 768;
+    }
+
+    // Mobile: open drawer
+    function openSidebar() {
+        sidebar.classList.add('open');
+        sidebar.classList.remove('collapsed');
+        sidebarOverlay.classList.add('active');
+    }
+
+    // Mobile: close drawer
+    function closeSidebar() {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+    }
+
+    // Desktop: collapse sidebar
+    function collapseSidebar() {
+        sidebar.classList.add('collapsed');
+    }
+
+    // Desktop: expand sidebar
+    function expandSidebar() {
+        sidebar.classList.remove('collapsed');
+    }
+
+    // Hamburger button (mobile only)
+    hamburgerBtn.addEventListener('click', openSidebar);
+
+    // Close button (mobile drawer X)
+    sidebarCloseBtn.addEventListener('click', closeSidebar);
+
+    // Collapse arrow button (in sidebar footer, desktop)
+    sidebarCollapseBtn.addEventListener('click', collapseSidebar);
+
+    // Expand tab (visible when collapsed, desktop)
+    sidebarExpandTab.addEventListener('click', expandSidebar);
+
+    // Overlay click closes sidebar
+    sidebarOverlay.addEventListener('click', closeSidebar);
+
+    // Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            if (isMobile()) {
+                closeSidebar();
+            } else {
+                collapseSidebar();
+            }
+        }
+    });
+
+    // Auto-close mobile drawer when resizing to desktop
+    window.addEventListener('resize', function() {
+        if (!isMobile()) {
+            closeSidebar();
+        }
+    });
+
+    // ===== NEW CHAT =====
+
+    newChatBtn.addEventListener('click', function() {
+        chatMessages.innerHTML = welcomeMessageHTML;
+        if (isMobile()) {
+            closeSidebar();
+        }
+        messageInput.focus();
+    });
+
+    // ===== TEXTAREA AUTO-RESIZE =====
+
     messageInput.addEventListener('input', function() {
         this.style.height = 'auto';
         this.style.height = Math.min(this.scrollHeight, 150) + 'px';
@@ -51,18 +157,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Handle quick action buttons
-    document.querySelectorAll('.quick-action-btn').forEach(btn => {
+    // ===== QUICK ACTION BUTTONS & KEYWORD CHIPS =====
+
+    document.querySelectorAll('.quick-action-btn, .keyword-chip').forEach(btn => {
         btn.addEventListener('click', function() {
             const query = this.getAttribute('data-query');
             if (query) {
                 messageInput.value = query;
                 chatForm.dispatchEvent(new Event('submit'));
+                // Auto-close sidebar on mobile
+                if (isMobile()) {
+                    closeSidebar();
+                }
             }
         });
     });
 
-    // Handle form submission
+    // ===== FORM SUBMISSION =====
+
     chatForm.addEventListener('submit', async function(e) {
         e.preventDefault();
 
@@ -92,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Hide typing indicator
             showTypingIndicator(false);
 
-            // Add assistant response with typing effect
+            // Add assistant response
             addMessage(response.answer, 'assistant');
 
         } catch (error) {

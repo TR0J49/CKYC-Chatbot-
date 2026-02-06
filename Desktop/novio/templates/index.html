@@ -11,10 +11,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Mobile sidebar backdrop -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <div class="app-container">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-content">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
                 <div class="logo">
                     <div class="logo-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -26,21 +29,175 @@
                     </div>
                     <span class="logo-text">Novio AI</span>
                 </div>
-                <div class="header-subtitle">
-                    <span class="status-dot"></span>
-                    <span>Online</span>
+                <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close sidebar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Nav actions -->
+            <div class="sidebar-nav">
+                <button class="sidebar-nav-btn new-chat-btn" id="newChatBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                    New Chat
+                </button>
+                <button class="sidebar-nav-btn history-btn" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    History
+                    <span class="coming-soon-badge">Soon</span>
+                </button>
+            </div>
+
+            <!-- Quick Actions in sidebar -->
+            <div class="sidebar-section">
+                <span class="sidebar-section-title">Quick Actions</span>
+                <div class="sidebar-quick-actions">
+                    <div class="quick-action-card">
+                        <button class="quick-action-btn" data-query="How do I create an account?">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                            Create Account
+                        </button>
+                        <div class="keyword-chips">
+                            <span class="keyword-chip" data-query="How to open a savings account?">Savings Account</span>
+                            <span class="keyword-chip" data-query="What documents are needed for KYC?">KYC Documents</span>
+                            <span class="keyword-chip" data-query="How to apply for a loan account?">Loan Account</span>
+                        </div>
+                    </div>
+                    <div class="quick-action-card">
+                        <button class="quick-action-btn" data-query="What is the minimum FD amount?">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0"/><path d="M2 10h2"/><path d="M20 10h2"/></svg>
+                            Minimum FD
+                        </button>
+                        <div class="keyword-chips">
+                            <span class="keyword-chip" data-query="What is the FD interest rate?">FD Interest Rate</span>
+                            <span class="keyword-chip" data-query="How to get a credit card against FD?">FD Credit Card</span>
+                            <span class="keyword-chip" data-query="What is the FD tenure and loan eligibility?">FD Loan Eligibility</span>
+                        </div>
+                    </div>
+                    <div class="quick-action-card">
+                        <button class="quick-action-btn" data-query="How to pay credit card bill?">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                            Pay Bill
+                        </button>
+                        <div class="keyword-chips">
+                            <span class="keyword-chip" data-query="How to pay loan EMI online?">Loan EMI</span>
+                            <span class="keyword-chip" data-query="How to set up autopay for credit card?">Auto Pay</span>
+                            <span class="keyword-chip" data-query="What is the minimum due on credit card?">Minimum Due</span>
+                            <span class="keyword-chip" data-query="How to check credit card bill statement?">Bill Statement</span>
+                        </div>
+                    </div>
+                    <div class="quick-action-card">
+                        <button class="quick-action-btn" data-query="What are the card benefits?">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            Card Benefits
+                        </button>
+                        <div class="keyword-chips">
+                            <span class="keyword-chip" data-query="What are the credit card reward points?">Reward Points</span>
+                            <span class="keyword-chip" data-query="What is the credit card cashback offer?">Cashback Offers</span>
+                            <span class="keyword-chip" data-query="What is the credit limit on loan-backed card?">Credit Limit</span>
+                            <span class="keyword-chip" data-query="Does the card offer zero annual fee?">Zero Annual Fee</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </header>
 
-        <!-- Chat Container -->
-        <main class="chat-container">
-            <div class="chat-messages" id="chatMessages">
-                <!-- Welcome Message -->
-                <div class="message assistant-message welcome-message">
+            <!-- Sidebar footer -->
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-top">
+                    <div class="sidebar-footer-info">
+                        <div class="sidebar-status">
+                            <span class="status-dot"></span>
+                            <span>System Online</span>
+                        </div>
+                        <span class="sidebar-powered">Powered by Novio AI</span>
+                    </div>
+                    <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Collapse sidebar">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Expand tab (visible when sidebar collapsed on desktop) -->
+        <button class="sidebar-expand-tab" id="sidebarExpandTab" aria-label="Expand sidebar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"/>
+            </svg>
+        </button>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-content">
+                    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open sidebar">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="3" y1="6" x2="21" y2="6"/>
+                            <line x1="3" y1="12" x2="21" y2="12"/>
+                            <line x1="3" y1="18" x2="21" y2="18"/>
+                        </svg>
+                    </button>
+                    <div class="header-title">
+                        <span class="header-title-text">Novio AI</span>
+                        <div class="header-subtitle">
+                            <span class="status-dot"></span>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Chat Container -->
+            <main class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Welcome Message -->
+                    <div class="message assistant-message welcome-message">
+                        <div class="message-avatar">
+                            <div class="avatar-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 2a4 4 0 0 1 4 4v1a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
+                                    <path d="M12 11v2"/>
+                                    <path d="M8 15h8"/>
+                                    <circle cx="9" cy="18" r="1"/>
+                                    <circle cx="15" cy="18" r="1"/>
+                                    <path d="M6 11a6 6 0 0 0 12 0"/>
+                                    <path d="M12 22v-3"/>
+                                    <path d="M7 22h10"/>
+                                    <path d="M5 6a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2"/>
+                                    <path d="M19 6a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-bubble">
+                                <p>Hello! I'm your <strong>Novio AI Assistant</strong>. I can help you with:</p>
+                                <ul>
+                                    <li>FD-backed credit cards</li>
+                                    <li>Account creation and KYC</li>
+                                    <li>Card features and benefits</li>
+                                    <li>Payments and transactions</li>
+                                    <li>General support queries</li>
+                                </ul>
+                                <p>How can I assist you today?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Typing Indicator -->
+                <div class="typing-indicator" id="typingIndicator">
                     <div class="message-avatar">
                         <div class="avatar-icon">
-                            <!-- AI Brain Icon -->
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M12 2a4 4 0 0 1 4 4v1a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
                                 <path d="M12 11v2"/>
@@ -55,76 +212,36 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="message-content">
-                        <div class="message-bubble">
-                            <p>Hello! I'm your <strong>Novio AI Assistant</strong>. I can help you with:</p>
-                            <ul>
-                                <li>FD-backed credit cards</li>
-                                <li>Account creation and KYC</li>
-                                <li>Card features and benefits</li>
-                                <li>Payments and transactions</li>
-                                <li>General support queries</li>
-                            </ul>
-                            <p>How can I assist you today?</p>
-                        </div>
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
                 </div>
-            </div>
+            </main>
 
-            <!-- Typing Indicator -->
-            <div class="typing-indicator" id="typingIndicator">
-                <div class="message-avatar">
-                    <div class="avatar-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2a4 4 0 0 1 4 4v1a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
-                            <path d="M12 11v2"/>
-                            <path d="M8 15h8"/>
-                            <circle cx="9" cy="18" r="1"/>
-                            <circle cx="15" cy="18" r="1"/>
-                            <path d="M6 11a6 6 0 0 0 12 0"/>
-                            <path d="M12 22v-3"/>
-                            <path d="M7 22h10"/>
-                            <path d="M5 6a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2"/>
-                            <path d="M19 6a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2"/>
-                        </svg>
+            <!-- Input Area -->
+            <footer class="input-container">
+                <form class="input-form" id="chatForm">
+                    <div class="input-wrapper">
+                        <textarea
+                            class="chat-input"
+                            id="messageInput"
+                            placeholder="Ask me anything about Novio..."
+                            rows="1"
+                            autofocus
+                        ></textarea>
+                        <button type="submit" class="send-button" id="sendButton">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 2L11 13"/>
+                                <path d="M22 2L15 22L11 13L2 9L22 2Z"/>
+                            </svg>
+                        </button>
                     </div>
-                </div>
-                <div class="typing-dots">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </main>
-
-        <!-- Input Area -->
-        <footer class="input-container">
-            <form class="input-form" id="chatForm">
-                <div class="input-wrapper">
-                    <textarea
-                        class="chat-input"
-                        id="messageInput"
-                        placeholder="Ask me anything about Novio..."
-                        rows="1"
-                        autofocus
-                    ></textarea>
-                    <button type="submit" class="send-button" id="sendButton">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 2L11 13"/>
-                            <path d="M22 2L15 22L11 13L2 9L22 2Z"/>
-                        </svg>
-                    </button>
-                </div>
-                <!-- Quick Actions -->
-                <div class="quick-actions">
-                    <button class="quick-action-btn" data-query="How do I create an account?">Create Account</button>
-                    <button class="quick-action-btn" data-query="What is the minimum FD amount?">Minimum FD</button>
-                    <button class="quick-action-btn" data-query="How to pay credit card bill?">Pay Bill</button>
-                    <button class="quick-action-btn" data-query="What are the card benefits?">Card Benefits</button>
-                </div>
-                <span class="disclaimer">Novio AI may make mistakes. Verify important information.</span>
-            </form>
-        </footer>
+                    <span class="disclaimer">Novio AI may make mistakes. Verify important information.</span>
+                </form>
+            </footer>
+        </div>
     </div>
 
     <script src="/static/js/chat.js"></script>
