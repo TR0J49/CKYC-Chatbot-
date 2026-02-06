@@ -139,12 +139,11 @@ function raiseQuery() {
     addBotMessage(msg);
     showScreen('chatScreen');
 
-    // Simulate redirect delay
     setTimeout(() => {
         addBotMessage(currentLang === 'hi'
             ? 'वेब पोर्टल पर रीडायरेक्ट हो रहा है...'
             : 'Redirecting to the Web Portal...');
-        // In production, window.open('https://portal.ckycindia.in/complaint', '_blank');
+        window.open('http://35.207.195.114:9090/contact-us', '_blank');
     }, 1500);
 }
 
