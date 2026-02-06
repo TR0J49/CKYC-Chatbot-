@@ -554,7 +554,8 @@ OUT_OF_SCOPE = {
 
 def has_domain_relevance(text):
     """Check if user query is relevant to CKYC domain and not out-of-scope."""
-    words = set(text.lower().split())
+    cleaned = re.sub(r"[^\w\s]", " ", text.lower())
+    words = set(cleaned.split())
     has_domain = bool(words & DOMAIN_WORDS)
     has_out_of_scope = bool(words & OUT_OF_SCOPE)
 

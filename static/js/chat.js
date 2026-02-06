@@ -171,9 +171,14 @@ async function sendMessage() {
 
     addUserMessage(message);
     input.value = '';
+    input.disabled = true;
 
     // Show typing indicator
     showTyping();
+
+    // Random delay between 2-3 seconds for natural feel
+    const typingDelay = 2000 + Math.random() * 1000;
+    const startTime = Date.now();
 
     try {
         const res = await fetch('/api/chat', {
@@ -184,8 +189,17 @@ async function sendMessage() {
 
         const data = await res.json();
 
+        // Wait remaining time so total delay is 2-3 seconds
+        const elapsed = Date.now() - startTime;
+        const remaining = typingDelay - elapsed;
+        if (remaining > 0) {
+            await new Promise(resolve => setTimeout(resolve, remaining));
+        }
+
         // Remove typing indicator
         hideTyping();
+        input.disabled = false;
+        input.focus();
 
         addBotMessage(data.response);
 
@@ -198,6 +212,8 @@ async function sendMessage() {
         }
     } catch (err) {
         hideTyping();
+        input.disabled = false;
+        input.focus();
         addBotMessage(currentLang === 'hi'
             ? 'कुछ गलत हो गया। कृपया पुनः प्रयास करें।'
             : 'Something went wrong. Please try again.');
