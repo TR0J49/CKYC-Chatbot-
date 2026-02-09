@@ -28,8 +28,8 @@ TRANSLATIONS = {
         "hi": "कृपया निम्नलिखित विकल्पों में से चुनें:",
     },
     "check_status": {
-        "en": "Check Status (API Integration)",
-        "hi": "स्थिति जाँचें (API एकीकरण)",
+        "en": "Check Status",
+        "hi": "स्थिति जाँचें",
     },
     "raise_query": {
         "en": "Raise Query/Complaint",
